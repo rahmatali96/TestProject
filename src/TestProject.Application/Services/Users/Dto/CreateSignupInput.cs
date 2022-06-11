@@ -1,39 +1,34 @@
-﻿using Abp.AutoMapper;
+﻿using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
 using Abp.Domain.Entities;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace TestProject.Services.Users.Dto
 {
+    [AutoMapFrom(typeof(TherapistDto))]
     public class CreateSignupInput
     {
-        [Required]
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        public string client_id { get; set; }
+        public string connection { get; set; }
 
+        [Required,DataType(DataType.EmailAddress),StringLength(255,ErrorMessage ="Email required")]
+        public string email { get; set; }
 
-        [Required]
-        [StringLength(25, MinimumLength = 2)]
-        public string FirstName { get; set; }
+        [Required,DataType(DataType.Text),StringLength(255,ErrorMessage ="Firstname is required ")]
+        public string given_name { get; set; }
 
+        [Required, DataType(DataType.Text), StringLength(255, ErrorMessage = "Lastname is required ")]
+        public string family_name { get; set; }
 
-        [Required]
-        [StringLength(25, MinimumLength = 2)]
-        public string LastName { get; set; }
+        [Required,DataType(DataType.Password),StringLength(255,MinimumLength =8,ErrorMessage ="Password is required")]
+        public string password { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        [StringLength(20, MinimumLength = 8)]
-        public string Password { get; set; }
+        public user_metadata user_metadata { get; set; }
 
-
-        [Required]
-        [DataType(DataType.Password)]
-        [StringLength(20, MinimumLength = 8)]
-        [Compare("Password")]
-        public string ConfirmPassword { get; set; }
-
-
-        [Required,DataType(DataType.PhoneNumber),StringLength(10)]
-        public long Mobile { get; set; }
+        public static explicit operator CreateSignupInput(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

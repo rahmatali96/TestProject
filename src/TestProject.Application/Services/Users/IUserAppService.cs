@@ -11,11 +11,11 @@ namespace TestProject.Services.Users
 {
     public interface IUserAppService:IApplicationService
     {
-        Task<CreateSignupInput> CreateAuth0User(CreateSignupInput signupInput);
-        Task<LoginInput> LoginWithAuth0(LoginInput loginInput);
+        Task<CreateSignupInput> CreateTherapist(CreateSignupInput createSignup);
+        Task<LoginInput> LoginTherapist(LoginInput login);
         Task<ForgotPasswordInput>ForgotPassword(ForgotPasswordInput forgotPasswordInpu0t);
-        void GetAllSignup();
+        Task<TokenInput> GetToken();
+        void GetAllSignup(getUser user);
         void UpdatePassword(string password);
-
     }
 }
