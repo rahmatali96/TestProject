@@ -46,14 +46,17 @@ namespace TestProject.Web.Host.Startup
         {
 
             string domain = $"https://{_appConfiguration["Auth0:Domain"]}/";
-            services
-                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.Authority = domain;
-                    options.Audience = _appConfiguration["Auth0:Audience"];
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = "https://testerpromact.au.auth0.com/";
+                options.Audience = "https://localhost:44311/";
+            
             // If the access token does not have a `sub` claim, `User.Identity.Name` will be `null`. Map it to a different claim by setting the NameClaimType below.
-                    options.TokenValidationParameters = new TokenValidationParameters
+            options.TokenValidationParameters = new TokenValidationParameters
                     {
                         NameClaimType = ClaimTypes.NameIdentifier
                     };
