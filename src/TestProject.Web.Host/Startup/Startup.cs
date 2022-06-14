@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using TestProject.Services.Settings;
 
 namespace TestProject.Web.Host.Startup
 {
@@ -44,7 +45,8 @@ namespace TestProject.Web.Host.Startup
 
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddMvc();
+            services.Configure<AppSettings>(_appConfiguration.GetSection("Auth0"));
             string domain = $"https://{_appConfiguration["Auth0:Domain"]}/";
             services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
