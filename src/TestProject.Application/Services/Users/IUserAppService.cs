@@ -15,11 +15,14 @@ namespace TestProject.Services.Users
     public interface IUserAppService:IApplicationService
     {
         Task<CreateSignupInput> CreateTherapist(CreateSignupInput createSignup);
-        LoginResponseDto LoginTherapist(LoginBodyDto loginBody);
+        Task<LoginResponse> LoginTherapist(LoginBody loginBody);
         Task<ForgotPasswordInput>ForgotPassword(ForgotPasswordInput forgotPasswordInpu0t);
         Task<TokenInput> GetToken();
         void GetAllSignup(getUser user);
+        //Task GetLoginWithFacebook();
         void UpdatePassword(string password);
         void GetCallback(string response);
+        string GetFacebookLoginURL();
+        FbLoginResponse GetFacebookUserInfo(string access_token);
     }
 }

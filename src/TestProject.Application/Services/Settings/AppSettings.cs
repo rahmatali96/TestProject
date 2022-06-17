@@ -12,6 +12,7 @@ namespace TestProject.Services.Settings
         public string Audience { get; set; }
         public string Client_id { get; set; }
         public string Client_secret { get; set; }
+        public string Callback_Uri { get; set; }
         public string Connection { get; set; }
     }
 }
